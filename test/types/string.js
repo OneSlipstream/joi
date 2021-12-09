@@ -4103,6 +4103,42 @@ describe('string', () => {
         });
     });
 
+    describe('cuid()', () => {
+
+        it('validates cuid', () => {
+
+            const schema = Joi.string().cuid();
+            Helper.validate(schema, [
+                ['w0rldofw4lm4rtl4bs', false, {
+                    message: '"value" must be a valid CUID',
+                    path: [],
+                    type: 'string.cuid',
+                    context: { value: 'w0rldofw4lm4rtl4bs', label: 'value' }
+                }],
+                ['cjld2cyuq0000t3rmniod1foy', true],
+                ['cjld2cyuqt3rmniod1foy', false, {
+                    message: '"value" must be a valid CUID',
+                    path: [],
+                    type: 'string.cuid',
+                    context: { value: 'cjld2cyuqt3rmniod1foy', label: 'value' }
+                }],
+                ['cjld2cyuq0000t3rmniod1-oy', false, {
+                    message: '"value" must be a valid CUID',
+                    path: [],
+                    type: 'string.cuid',
+                    context: { value: 'cjld2cyuq0000t3rmniod1-oy', label: 'value' }
+                }],
+                ['gjld2cyuq0000t3rmniod1foy', false, {
+                    message: '"value" must be a valid CUID',
+                    path: [],
+                    type: 'string.cuid',
+                    context: { value: 'gjld2cyuq0000t3rmniod1foy', label: 'value' }
+                }]
+            ]);
+        });
+
+    });
+
     describe('hex()', () => {
 
         it('validates the hexadecimal options', () => {
